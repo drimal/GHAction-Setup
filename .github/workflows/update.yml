@@ -1,5 +1,4 @@
 name: GitHub Actions Tests
-
 on: 
   # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
   schedule:
@@ -10,8 +9,8 @@ on:
     # Every 5 minutes.
     # - cron: '*/5 * * * *'
     # At the beginning of every day.
-    - cron: "30 20 * * *"
-#on: [push]
+    - cron: "37 20 * * *"
+# on: [push]
 
 jobs:
   report:
