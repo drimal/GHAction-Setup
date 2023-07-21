@@ -1,36 +1,35 @@
 # This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: GitHub Self-Updating Repository Demo
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
+  schedule:
+    # The shortest interval you can run scheduled workflows is once every 5 minutes.
+    # Note: The schedule event can be delayed during periods of high loads of GitHub Actions workflow runs. 
+    # High load times include the start of every hour. 
+    # To decrease the chance of delay, schedule your workflow to run at a different time of the hour.
+    # Every 5 minutes.
+    # - cron: '*/5 * * * *'
+    # At the beginning of every day.
+    - cron: "10 16 * * *"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# on: [push]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  report:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Check out repository code
+        # https://github.com/actions/checkout/tree/v3.0.2
+        uses: actions/checkout@v3
+      - name: Modify date and time
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          date > README.md
+          cat README.md
+      - name: Push to repository
+        run: |
+          git config --global user.name "Dipak"
+          git config --global user.email "rimaldipak@gmail.com"
+          now=$(date)
+          git add -A
+          git commit -m "Auto Push on $now"
+          git push
