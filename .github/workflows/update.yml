@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Modify date and time
         run: |
-          echo "This is repository to test github action " > README.md
+          echo "This event was triggered by github action.\n" > README.md
           echo "Today is: " >> README.md
           date >> README.md
           cat README.md
