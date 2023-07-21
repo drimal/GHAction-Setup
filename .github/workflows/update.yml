@@ -1,8 +1,8 @@
-# This is a basic workflow to help you get started with Actions
-name: GitHub Actions Tests
-on:
+name: GitHub Self-Updating Repository Demo
+
+# on:
   # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
-  schedule:
+  #schedule:
     # The shortest interval you can run scheduled workflows is once every 5 minutes.
     # Note: The schedule event can be delayed during periods of high loads of GitHub Actions workflow runs. 
     # High load times include the start of every hour. 
@@ -10,9 +10,8 @@ on:
     # Every 5 minutes.
     # - cron: '*/5 * * * *'
     # At the beginning of every day.
-    #- cron: "13 20 * * *"
-
- on: [push]
+    #- cron: "0 0 * * *"
+on: [push]
 
 jobs:
   report:
@@ -27,8 +26,8 @@ jobs:
           cat README.md
       - name: Push to repository
         run: |
-          git config --global user.name "Dipak"
-          git config --global user.email "rimaldipak@gmail.com"
+          git config --global user.name "Dipak Rimal"
+          git config --global user.email "drimal@users.noreply.github.com"
           now=$(date)
           git add -A
           git commit -m "Auto Push on $now"
